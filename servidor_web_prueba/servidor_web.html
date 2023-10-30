@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SERVIDOR ESP32 | MODO ESTACION</title>
+
+    <style>
+        body {
+            margin: 0px auto;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #title {
+            margin-top: 50px;
+            margin-bottom: 10px;
+            color: rgb(14, 14, 14);
+        }
+
+        #subtitle {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: dimgray;
+        }
+
+        #colorLabel {
+            width: 50px;
+            height: 27px;
+            border: solid black 1px;
+            background-color: white;
+            display: inline-block;
+        }
+
+        .slidecontainer {
+            margin-left: 25%;
+            width: 50%;
+        }
+
+        input[type=range] {
+            height: 26px;
+            -webkit-appearance: none;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 14px;
+            cursor: pointer;
+            animate: 0.2s;
+            box-shadow: 1px 1px 1px #50555C;
+            background: #50555c;
+            border-radius: 14px;
+            border: 0px solid #000000;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            box-shadow: 0px 0px 0px #000000;
+            border: 0px solid #000000;
+            height: 20px;
+            width: 40px;
+            border-radius: 12px;
+            background: #529DE1;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -3px;
+        }
+
+        input[type=range]:focus::-webkit-slider-runnable-track {
+            background: #50555C;
+        }
+
+        input[type=range]::-moz-range-track {
+            width: 100%;
+            height: 14px;
+            cursor: pointer;
+            animate: 0.2s;
+            box-shadow: 1px 1px 1px #50555C;
+            background: #50555C;
+            border-radius: 14px;
+            border: 0px solid #000000;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            box-shadow: 0px 0px 0px #000000;
+            border: 0px solid #000000;
+            height: 20px;
+            width: 40px;
+            border-radius: 12px;
+            background: #529DE1;
+            cursor: pointer;
+        }
+
+        input[type=range]::-ms-track {
+            width: 100%;
+            height: 14px;
+            cursor: pointer;
+            animate: 0.2s;
+            background: transparent;
+            border-color: transparent;
+            color: transparent;
+        }
+
+        input[type=range]::-ms-fill-lower {
+            background: #50555C;
+            border: 0px solid #000000;
+            border-radius: 28px;
+            box-shadow: 1px 1px 1px #50555C;
+        }
+
+        input[type=range]::-ms-fill-upper {
+            background: #50555C;
+            border: 0px solid #000000;
+            border-radius: 28px;
+            box-shadow: 1px 1px 1px #50555C;
+        }
+
+        input[type=range]::-ms-thumb {
+            margin-top: 1px;
+            box-shadow: 0px 0px 0px #000000;
+            border: 0px solid #000000;
+            height: 20px;
+            width: 40px;
+            border-radius: 12px;
+            background: #529DE1;
+            cursor: pointer;
+        }
+
+        input[type=range]:focus::-ms-fill-lower {
+            background: #50555C;
+        }
+
+        input[type=range]:focus::-ms-fill-upper {
+            background: #50555C;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1 id="title">SERVIDOR WEB ESP32</h1>
+        <h3 id="subtitle">Modo Estacion (STA)</h3>
+    </div>
+    <div class="slidecontainer">
+        <input type="range" min="0" max="6" value="0" class="slider" id="myRange">
+    </div>
+
+    <div>
+        <p>VALOR: <strong id="value">0</strong></p>
+        <label style="vertical-align:super;">ESTADO: </label><div id="colorLabel"></div>
+    </div>
+
+    <script>
+        let slider = document.getElementById("myRange");
+        let output = document.getElementById("value");
+        output.innerHTML = slider.value;
+
+        slider.oninput = function() {
+            output.innerHTML = this.value;
+            let url = "/";
+            switch (this.value) {
+                case '0':
+                    url = "/rangeInput0"
+                    break;
+                case '1':
+                    url = "/rangeInput1"
+                    break;
+                case '2':
+                    url = "/rangeInput2"
+                    break;
+                case '3':
+                    url = "/rangeInput3"
+                    break;
+                case '4':
+                    url = "/rangeInput4"
+                    break;
+                case '5':
+                    url = "/rangeInput5"
+                    break;
+                case '6':
+                    url = "/rangeInput6"
+                    break;
+                default:
+                    break;
+            }
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>
